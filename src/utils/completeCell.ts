@@ -6,7 +6,7 @@ function completeCell(board: SudokuBoard, row: number, column: number) {
     ...getRow(board, row),
     ...getColumn(board, column),
     ...getSquare(board, squareCoordinates[row][column]),
-  ];
+  ].filter(item => item !== 0);
   let possibilities: number[] = [];
 
   // For every possible number, check if it is already taken //
