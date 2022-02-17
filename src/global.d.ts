@@ -1,3 +1,3 @@
 /// <reference types="svelte" />
 
-type SudokuBoard = number[][];
+type SudokuBoard = number[][number[]];
