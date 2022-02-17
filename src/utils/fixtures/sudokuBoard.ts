@@ -1,4 +1,4 @@
-const sudokuBoard: number[][] = [
+const sudokuBoard: SudokuBoard = [
   [9, 8, 7, 6, 5, 4, 3, 2, 1],
   [2, 4, 6, 1, 7, 3, 9, 8, 5],
   [3, 5, 1, 9, 2, 8, 7, 4, 6],
