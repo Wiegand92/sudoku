@@ -1,6 +1,6 @@
 // Hardcoded coordinates for the squares //
 
-const squareCoordinates: number[][] = [
+const squareCoordinates: SudokuBoard = [
   [1, 1, 1, 2, 2, 2, 3, 3, 3],
   [1, 1, 1, 2, 2, 2, 3, 3, 3],
   [1, 1, 1, 2, 2, 2, 3, 3, 3],
