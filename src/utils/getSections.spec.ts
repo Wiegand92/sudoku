@@ -9,7 +9,7 @@ import {
 describe("getSquare function", () => {
   it("returns the proper square from the sudoku array", () => {
     const expected = squareOne;
-    const actual = getSquare(sudokuBoard, 1);
+    const actual = getSquare(sudokuBoard, 0);
 
     expect(actual).toEqual(expected);
   });
