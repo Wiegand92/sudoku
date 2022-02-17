@@ -16,20 +16,20 @@
 ## Todo
 
 - [x] Setup webpack w/babel, typescript, and frontend tech
-- [] Create sudoku solver
+- [ ] Create sudoku solver
   - [x] Helper functions
-  - [] Backtracking Algorithm
-  - [] One Cell Constraint Algorithm
-- [] Create sudoku generator (dependent on solver)
-- [] Create front-end (Svelte)
+  - [ ] Backtracking Algorithm
+  - [ ] One Cell Constraint Algorithm
+- [ ] Create sudoku generator (dependent on solver)
+- [ ] Create front-end (Svelte)
 
 ## Game Features
 
-- [] Difficulty levels
-- [] Input numbers as notes
-- [] Keyboard controls
-- [] Mobile functionality
-- [] Hints (?)
+- [ ] Difficulty levels
+- [ ] Input numbers as notes
+- [ ] Keyboard controls
+- [ ] Mobile functionality
+- [ ] Hints (?)
 
 ## Resources
 
