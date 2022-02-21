@@ -1,7 +1,7 @@
 import { getRow, getColumn, getBlock } from "./getSections";
 
-function checkRow(grid: SudokuBoard, row: number, num: number) {
-  const fullRow: number[] = getRow(grid, row);
+function checkRow(board: SudokuBoard, row: number, num: number) {
+  const fullRow: number[] = getRow(board, row);
 
   // true if number is not present, false if it is //
   let valid = !fullRow.includes(num);
@@ -9,16 +9,16 @@ function checkRow(grid: SudokuBoard, row: number, num: number) {
   return valid;
 }
 
-function checkColumn(grid: SudokuBoard, col: number, num: number) {
-  const fullColumn: number[] = getColumn(grid, col);
+function checkColumn(board: SudokuBoard, col: number, num: number) {
+  const fullColumn: number[] = getColumn(board, col);
 
   let valid = !fullColumn.includes(num);
 
   return valid;
 }
 
-function checkBlock(grid: SudokuBoard, block: number, num: number) {
-  const fullBlock: number[] = getBlock(grid, block);
+function checkBlock(board: SudokuBoard, block: number, num: number) {
+  const fullBlock: number[] = getBlock(board, block);
 
   let valid = !fullBlock.includes(num);
 
@@ -26,16 +26,16 @@ function checkBlock(grid: SudokuBoard, block: number, num: number) {
 }
 
 function validMove(
-  grid: SudokuBoard,
+  board: SudokuBoard,
   row: number,
   col: number,
   block: number,
   num: number
 ) {
   return (
-    checkBlock(grid, block, num) &&
-    checkColumn(grid, col, num) &&
-    checkRow(grid, row, num)
+    checkBlock(board, block, num) &&
+    checkColumn(board, col, num) &&
+    checkRow(board, row, num)
   );
 }
 
