@@ -1,6 +1,6 @@
 // Hardcoded coordinates for the squares //
 
-const squareCoordinates: SudokuBoard = [
+const blockCoordinates: SudokuBoard = [
   [0, 0, 0, 1, 1, 1, 2, 2, 2],
   [0, 0, 0, 1, 1, 1, 2, 2, 2],
   [0, 0, 0, 1, 1, 1, 2, 2, 2],
@@ -12,4 +12,4 @@ const squareCoordinates: SudokuBoard = [
   [6, 6, 6, 7, 7, 7, 8, 8, 8],
 ];
 
-export { squareCoordinates };
+export { blockCoordinates };

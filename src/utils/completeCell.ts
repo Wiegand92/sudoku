@@ -1,12 +1,12 @@
-import { getRow, getColumn, getSquare } from "./getSections";
-import { squareCoordinates } from "./squareCoordinates";
+import { getRow, getColumn, getBlock } from "./getSections";
+import { blockCoordinates } from "./blockCoordinates";
 
 function completeCell(board: SudokuBoard, row: number, column: number) {
   const usedNumbers = [
     ...getRow(board, row),
     ...getColumn(board, column),
-    ...getSquare(board, squareCoordinates[row][column]),
-  ].filter(item => item !== 0);
+    ...getBlock(board, blockCoordinates[row][column]),
+  ].filter((item) => item !== 0);
   let possibilities: number[] = [];
 
   // For every possible number, check if it is already taken //

@@ -3,7 +3,7 @@ const sudokuBoard: SudokuBoard = [
   [2, 4, 6, 1, 7, 3, 9, 8, 5],
   [3, 5, 1, 9, 2, 8, 7, 4, 6],
   [1, 2, 8, 5, 3, 7, 6, 9, 4],
-  [6, 3, 4, 8, 9, 3, 1, 5, 7],
+  [6, 3, 4, 8, 9, 2, 1, 5, 7],
   [7, 9, 5, 4, 6, 1, 8, 3, 2],
   [5, 1, 9, 2, 8, 6, 4, 7, 3],
   [4, 7, 2, 3, 1, 9, 5, 6, 8],
@@ -22,10 +22,22 @@ const incompleteSudokuBoard: SudokuBoard = [
   [0, 0, 0, 0, 4, 0, 0, 0, 9],
 ];
 
-const squareOne = [9, 8, 7, 2, 4, 6, 3, 5, 1];
+const invalidSudokuBoard: SudokuBoard = [
+  [8, 7, 8, 0, 0, 0, 0, 2, 0],
+  [0, 0, 0, 0, 0, 3, 0, 8, 5],
+  [0, 0, 3, 0, 2, 0, 0, 4, 0],
+  [0, 0, 0, 5, 0, 7, 0, 9, 0],
+  [0, 0, 4, 0, 0, 0, 1, 5, 0],
+  [0, 9, 0, 0, 0, 0, 0, 3, 0],
+  [5, 0, 0, 0, 0, 0, 0, 7, 3],
+  [0, 0, 2, 0, 1, 0, 0, 6, 0],
+  [0, 0, 0, 0, 4, 0, 0, 0, 9],
+];
+
+const blockOne = [9, 8, 7, 2, 4, 6, 3, 5, 1];
 
 const rowOne = [9, 8, 7, 6, 5, 4, 3, 2, 1];
 
 const columnOne = [9, 2, 3, 1, 6, 7, 5, 4, 8];
 
-export { sudokuBoard, incompleteSudokuBoard, squareOne, rowOne, columnOne };
+export { sudokuBoard, incompleteSudokuBoard, invalidSudokuBoard, blockOne, rowOne, columnOne };

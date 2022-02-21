@@ -1,4 +1,4 @@
-import { squareCoordinates } from "./squareCoordinates";
+import { blockCoordinates } from "./blockCoordinates";
 
 // Returns a single Row of the sudoku board //
 function getRow(board: SudokuBoard, row: number) {
@@ -15,11 +15,11 @@ function getColumn(board: SudokuBoard, column: number) {
 }
 
 // Returns a single square of the sudoku board //
-function getSquare(board: SudokuBoard, square: number) {
+function getBlock(board: SudokuBoard, square: number) {
   const boardSquare = [];
   for (let row = 0; row < 9; row++) {
     for (let column = 0; column < 9; column++) {
-      if (square === squareCoordinates[row][column]) {
+      if (square === blockCoordinates[row][column]) {
         boardSquare.push(board[row][column]);
       }
     }
@@ -27,4 +27,4 @@ function getSquare(board: SudokuBoard, square: number) {
   return boardSquare;
 }
 
-export { getRow, getColumn, getSquare };
+export { getRow, getColumn, getBlock };

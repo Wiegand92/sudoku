@@ -1,15 +1,15 @@
-import { getSquare, getColumn, getRow } from "./getSections";
+import { getBlock, getColumn, getRow } from "./getSections";
 import {
   sudokuBoard,
   rowOne,
   columnOne,
-  squareOne,
+  blockOne,
 } from "./fixtures/sudokuBoard";
 
-describe("getSquare function", () => {
-  it("returns the proper square from the sudoku array", () => {
-    const expected = squareOne;
-    const actual = getSquare(sudokuBoard, 0);
+describe("getBlock function", () => {
+  it("returns the proper block from the sudoku array", () => {
+    const expected = blockOne;
+    const actual = getBlock(sudokuBoard, 0);
 
     expect(actual).toEqual(expected);
   });
