@@ -1,3 +1,4 @@
+import type { SudokuBoard } from "../global";
 import { getRow, getColumn, getBlock } from "./getSections";
 
 function checkRow(board: SudokuBoard, row: number, num: number) {

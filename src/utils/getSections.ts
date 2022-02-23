@@ -1,3 +1,5 @@
+import type { SudokuBoard } from "../global";
+
 import { blockCoordinates } from "./blockCoordinates";
 
 // Returns a single Row of the sudoku board //

@@ -1,3 +1,5 @@
+import type { SudokuBoard } from "../global";
+
 // Hardcoded coordinates for the squares //
 
 const blockCoordinates: SudokuBoard = [

@@ -1,3 +1,5 @@
+import type { SudokuBoard } from "../global";
+
 import { getRow, getColumn, getBlock } from "./getSections";
 import { blockCoordinates } from "./blockCoordinates";
 
