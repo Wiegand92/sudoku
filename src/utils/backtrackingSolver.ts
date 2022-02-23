@@ -5,7 +5,17 @@ import { printBoard } from "./printBoard";
 import type { SudokuBoard } from "../global";
 
 // Create an empty board to copy solution into //
-const foundSolution: SudokuBoard = Array(9).fill(Array(9).fill(0));
+const foundSolution: SudokuBoard = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+];
 
 function backtrackingSolver(
   board: SudokuBoard,
@@ -48,10 +58,10 @@ function backtrackingSolver(
         }
 
         // This is being logged more times than it should be //
-        console.log("The current board:");
-        printBoard(board);
-        console.log("The copied board");
-        printBoard(foundSolution);
+        // console.log("The current board:");
+        // printBoard(board);
+        // console.log("The copied board");
+        // printBoard(foundSolution);
         // After the array is copied, reset this square to 0 to check for non uniqueness //
         board[row][col] = 0;
       }
@@ -62,4 +72,4 @@ function backtrackingSolver(
   return count;
 }
 
-export { backtrackingSolver };
+export { backtrackingSolver, foundSolution };
