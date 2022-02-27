@@ -1,8 +1,8 @@
-import type { SudokuBoard } from "../global";
+import type { SudokuBoard } from "./sudokuTypes";
 import { getRow, getColumn, getBlock } from "./getSections";
 
 function checkRow(board: SudokuBoard, row: number, num: number) {
-  const fullRow: number[] = getRow(board, row);
+  const fullRow = getRow(board, row);
 
   // true if number is not present, false if it is //
   let valid = !fullRow.includes(num);

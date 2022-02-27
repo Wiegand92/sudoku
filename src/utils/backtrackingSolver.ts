@@ -2,7 +2,7 @@ import { validMove } from "./checkHouse";
 import { blockCoordinates } from "./blockCoordinates";
 import { printBoard } from "./printBoard";
 
-import type { SudokuBoard } from "../global";
+import type { SudokuBoard } from "./sudokuTypes";
 
 // Create an empty board to copy solution into //
 const foundSolution: SudokuBoard = [

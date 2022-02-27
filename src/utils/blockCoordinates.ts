@@ -1,8 +1,6 @@
-import type { SudokuBoard } from "../global";
-
 // Hardcoded coordinates for the squares //
 
-const blockCoordinates: SudokuBoard = [
+const blockCoordinates: number[][] = [
   [0, 0, 0, 1, 1, 1, 2, 2, 2],
   [0, 0, 0, 1, 1, 1, 2, 2, 2],
   [0, 0, 0, 1, 1, 1, 2, 2, 2],
