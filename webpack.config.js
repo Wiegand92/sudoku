@@ -20,6 +20,13 @@ module.exports = {
     filename: "scripts/index.js",
     path: path.join(__dirname, "/public"),
   },
+  resolve: {
+    alias: {
+      svelte: path.resolve("node_modules", "svelte"),
+    },
+    extensions: [".mjs", ".js", ".ts", ".svelte"],
+    mainFields: ["svelte", "browser", "module", "main"],
+  },
   plugins,
   module: {
     rules: [
