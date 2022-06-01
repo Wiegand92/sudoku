@@ -3,7 +3,7 @@ import { blockCoordinates } from "./blockCoordinates";
 // import { printBoard } from "./printBoard";
 
 import type { SudokuBoard } from "./sudokuTypes";
-// import { easySudokuBoard } from "./fixtures/sudokuBoard";
+import { easySudokuBoard } from "./fixtures/sudokuBoard";
 
 // Create an empty board to copy solution into //
 const foundSolution: SudokuBoard = [
@@ -18,7 +18,7 @@ const foundSolution: SudokuBoard = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-function backtrackingSolver(
+async function backtrackingSolver(
   board: SudokuBoard,
   row: number = 0,
   col: number = 0,
@@ -37,7 +37,7 @@ function backtrackingSolver(
 
   // If the square is not 0, and there is only 1 solution, move to the next square //
   if (board[row][col] > 0 && count < 2) {
-    return backtrackingSolver(board, row, col + 1, count);
+    return await backtrackingSolver(board, row, col + 1, count);
   }
 
   // Try every number from 1...9 //
@@ -49,11 +49,11 @@ function backtrackingSolver(
       board[row][col] = num;
 
       // Check if this is a valid solution //
-      const solutions = backtrackingSolver(board, row, col + 1, count).count;
+      const solutions = await backtrackingSolver(board, row, col + 1, count);
 
       // If the solutions are higher than the count, copy the array //
-      if (solutions > count) {
-        count = solutions;
+      if (solutions.count > count) {
+        count = solutions.count;
         for (let r = 0; r < 9; r++) {
           for (let c = 0; c < 9; c++) {
             if (board[r][c] > 0) {
@@ -72,5 +72,5 @@ function backtrackingSolver(
   // When we have gone through the entire board, return the number of solutions, and the full board //
   return { count, foundSolution };
 }
-
+let puzzle = easySudokuBoard;
 export { backtrackingSolver, foundSolution };

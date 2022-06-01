@@ -2,8 +2,9 @@ import type { SudokuBoard } from "./sudokuTypes";
 import { backtrackingSolver } from "./backtrackingSolver";
 import { blockCoordinates } from "./blockCoordinates";
 import { validMove } from "./checkHouse";
+import { copyPuzzle } from "./copyPuzzle";
 
-function generateBoard(): SudokuBoard {
+async function generateBoard(): Promise<SudokuBoard> {
   const emptyPuzzle: SudokuBoard = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -30,28 +31,22 @@ function generateBoard(): SudokuBoard {
     }
   }
 
-  const filledBoard = backtrackingSolver(emptyPuzzle);
+  const filledBoard = await backtrackingSolver(emptyPuzzle);
 
   if (filledBoard.count === 1) {
     return filledBoard.foundSolution;
   } else {
-    return generateBoard();
+    return await generateBoard();
   }
 }
 
-function generatePuzzle(difficulty: "hard" | "medium" | "easy" = "easy") {
-  const puzzleSolution: SudokuBoard = generateBoard();
+async function generatePuzzle(difficulty: "hard" | "medium" | "easy" = "easy") {
+  const puzzleSolution: SudokuBoard = await generateBoard();
 
   // Make a copy of the full board to poke holes in //
   let puzzle: SudokuBoard = [];
 
-  for (let row = 0; row < 9; row++) {
-    const newRow = [];
-    for (let col = 0; col < 9; col++) {
-      newRow.push(puzzleSolution[row][col]);
-    }
-    puzzle[row] = [...newRow];
-  }
+  copyPuzzle(puzzleSolution, puzzle);
 
   // For now we define difficulty by the number of empty cells //
   // Easy = 41 //
@@ -59,29 +54,35 @@ function generatePuzzle(difficulty: "hard" | "medium" | "easy" = "easy") {
   // Difficult = 61 //
   if (difficulty === "easy") {
     for (let i = 0; i < 41; i++) {
-      function getRandomCell() {
-        return Math.floor(Math.random() * 9);
-      }
-      function pokeHole() {
-        const x = getRandomCell();
-        const y = getRandomCell();
-        const prevValue = puzzle[x][y];
-        if (puzzle[x][y] !== 0) {
-          puzzle[x][y] = 0;
-          if (backtrackingSolver(puzzle).count === 1) return;
-          else {
-            puzzle[x][y] = prevValue;
-            pokeHole();
-          }
-        } else {
-          pokeHole();
-        }
-      }
-      pokeHole();
+      await pokeHole(puzzle);
     }
   }
 
   return { puzzleSolution, puzzle };
+}
+
+function getRandomCell() {
+  return Math.floor(Math.random() * 9);
+}
+
+// Picks random coordinates to set to 0 and checks that the puzzle has only one solution //
+async function pokeHole(puzzle) {
+  const x = getRandomCell();
+  const y = getRandomCell();
+  const prevValue = puzzle[x][y];
+  if (puzzle[x][y] !== 0) {
+    puzzle[x][y] = 0;
+    // need to copy puzzle to avoid mutation //
+    const puzzleCopy = copyPuzzle(puzzle);
+    const solution = await backtrackingSolver(puzzleCopy);
+    if (solution.count === 1) return;
+    else {
+      puzzle[x][y] = prevValue;
+      return await pokeHole(puzzle);
+    }
+  } else {
+    return await pokeHole(puzzle);
+  }
 }
 
 export { generateBoard, generatePuzzle };
