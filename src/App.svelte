@@ -4,7 +4,7 @@
 
 <section>
     <h1>Sudoku by: Alex Wiegand</h1>
-    <SudokuBoard></SudokuBoard>
+    <SudokuBoard />
 </section>
 <style lang='postcss'>
     :global(html, body) {

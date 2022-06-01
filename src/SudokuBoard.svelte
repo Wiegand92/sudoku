@@ -1,16 +1,22 @@
 <script lang='ts'>
-    import { generatePuzzle } from "./utils/generatePuzzle";
-    const {puzzle, puzzleSolution} = generatePuzzle();
-    // playerSolution will contain a copy of the puzzle for the player to make changes to //
-    const playerSolution = [];
-    puzzle.forEach(r=> {
-        const row = [];
-        r.forEach(c => {
-            row.push(c)
-        })
-        playerSolution.push(row)
-    });
+import { copyPuzzle } from "./utils/copyPuzzle";
 
+    import { generatePuzzle } from "./utils/generatePuzzle";
+    let puzzle = [];
+    let puzzleSolution = [];
+    // playerSolution will contain a copy of the puzzle for the player to make changes to //
+    let playerSolution = [];
+    
+    async function initialize(){
+        playerSolution = []
+        return await generatePuzzle().then(puzzleGiven => {
+            puzzle = puzzleGiven.puzzle;
+            puzzleSolution = puzzleGiven.puzzleSolution;
+            copyPuzzle(puzzle, playerSolution)
+        })
+    }
+    
+    let promise = initialize()
     // An array of moves for time travel //
     const moves = [];
 
@@ -73,6 +79,7 @@
         for(let row = 0; row < 9; row++){
             // Early break if solved becomes false //
             if(solved === false){ break; }
+            // Check each value against solution given //
             for(let col = 0; col < 9; col++){
                 if(puzzleSolution[row][col] !== playerSolution[row][col]){
                     solved = false
@@ -85,6 +92,9 @@
 
 </script>
 <section>
+{#await promise}
+    <p>We are generating your puzzle, please wait...</p>
+    {:then}
     <div>
     {#each puzzle as row, rowIndex}
         {#each row as column, colIndex}
@@ -106,6 +116,8 @@
         {/each}
     {/each}
     </div>
+{/await}
+<button on:click={()=> {promise = initialize()}}>New Game</button>
 </section>
 <style lang='postcss'>
     section{
