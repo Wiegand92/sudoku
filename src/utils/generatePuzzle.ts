@@ -41,7 +41,6 @@ function generateBoard(): SudokuBoard {
 
 function generatePuzzle(difficulty: "hard" | "medium" | "easy" = "easy") {
   const puzzleSolution: SudokuBoard = generateBoard();
-  console.log(puzzleSolution);
 
   // Make a copy of the full board to poke holes in //
   let puzzle: SudokuBoard = [];
@@ -66,9 +65,14 @@ function generatePuzzle(difficulty: "hard" | "medium" | "easy" = "easy") {
       function pokeHole() {
         const x = getRandomCell();
         const y = getRandomCell();
+        const prevValue = puzzle[x][y];
         if (puzzle[x][y] !== 0) {
           puzzle[x][y] = 0;
-          return;
+          if (backtrackingSolver(puzzle).count === 1) return;
+          else {
+            puzzle[x][y] = prevValue;
+            pokeHole();
+          }
         } else {
           pokeHole();
         }
@@ -79,7 +83,5 @@ function generatePuzzle(difficulty: "hard" | "medium" | "easy" = "easy") {
 
   return { puzzleSolution, puzzle };
 }
-
-console.log(generatePuzzle());
 
 export { generateBoard, generatePuzzle };
