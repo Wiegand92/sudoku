@@ -73,6 +73,7 @@
         for(let row = 0; row < 9; row++){
             // Early break if solved becomes false //
             if(solved === false){ break; }
+            // Check each value against solution given //
             for(let col = 0; col < 9; col++){
                 if(puzzleSolution[row][col] !== playerSolution[row][col]){
                     solved = false
