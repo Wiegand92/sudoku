@@ -2,15 +2,15 @@
     import SudokuBoard from "./SudokuBoard.svelte";
 </script>
 
-<section>
+<div>
     <h1>Sudoku by: Alex Wiegand</h1>
     <SudokuBoard />
-</section>
+</div>
 <style lang='postcss'>
     :global(html, body) {
         @apply p-0 m-0 h-full w-full fixed;
     }
-    section {
+    div {
         @apply p-0 m-0 h-full w-full fixed flex flex-col;
     }
     h1 {

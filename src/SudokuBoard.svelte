@@ -2,22 +2,34 @@
 import { copyPuzzle } from "./utils/copyPuzzle";
 
     import { generatePuzzle } from "./utils/generatePuzzle";
-    let puzzle = [];
+    import { game } from './store';
     let puzzleSolution = [];
     // playerSolution will contain a copy of the puzzle for the player to make changes to //
     let playerSolution = [];
     
-    async function initialize(){
-        playerSolution = []
-        return await generatePuzzle().then(puzzleGiven => {
-            puzzle = puzzleGiven.puzzle;
-            puzzleSolution = puzzleGiven.puzzleSolution;
-            copyPuzzle(puzzle, playerSolution)
-        })
+    // async function initialize(){
+    //     playerSolution = []
+    //     return await generatePuzzle().then(puzzleGiven => {
+    //         let puzzle = puzzleGiven.puzzle;
+    //         puzzleSolution = puzzleGiven.puzzleSolution;
+    //         copyPuzzle(puzzle, playerSolution)
+    //         return puzzleGiven.puzzle
+    //     })
+    // }
+    function initialize(game) {
+        copyPuzzle(game.puzzle, playerSolution)
+        console.log(playerSolution)
+        copyPuzzle(game.puzzleSolution, puzzleSolution)
+
     }
+
     
-    let promise = initialize()
+    // let promise = initialize()
     // An array of moves for time travel //
+    $: {
+        if($game !== null) initialize($game)
+    }
+
     const moves = [];
 
     // Returns class list for cells //
@@ -92,11 +104,11 @@ import { copyPuzzle } from "./utils/copyPuzzle";
 
 </script>
 <section>
-{#await promise}
+    {#if $game === null}
     <p>We are generating your puzzle, please wait...</p>
-    {:then}
+    {:else if playerSolution.length > 0}
     <div>
-    {#each puzzle as row, rowIndex}
+    {#each $game.puzzle as row, rowIndex}
         {#each row as column, colIndex}
             <span class={getClassName(rowIndex, colIndex)}>
                 {#if column !== 0}
@@ -116,8 +128,8 @@ import { copyPuzzle } from "./utils/copyPuzzle";
         {/each}
     {/each}
     </div>
-{/await}
-<button on:click={()=> {promise = initialize()}}>New Game</button>
+    {/if}
+<button on:click={()=> {}}>New Game</button>
 </section>
 <style lang='postcss'>
     section{
