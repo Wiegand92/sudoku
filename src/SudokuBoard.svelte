@@ -1,15 +1,21 @@
 <script lang='ts'>
-    // import { generatePuzzle } from "./utils/generatePuzzle";
-    // // playerSolution will contain a copy of the puzzle for the player to make changes to //
+    // An array of moves for time travel //
+    const moves = [];
+    // playerSolution will contain a copy of the puzzle for the player to make changes to //
     const playerSolution = [];
+    // These variables will be populated with the puzzle and solution //
     let puzzle = [];
     let puzzleSolution = [];
+    // Loading state for puzzle //
     let puzzleGenerated = false;
 
+    // worker will generate puzzle on different thread to avoid blocking //
     const worker = new Worker(new URL('./utils/worker', import.meta.url));
 
+    // Generate puzzle //
     worker.postMessage('')
 
+    // When the worker finishes generation, copy over puzzle and puzzleSolution //
     worker.onmessage = function (e) {
         puzzle = e.data.puzzle;
         puzzleSolution = e.data.puzzleSolution;
@@ -22,9 +28,6 @@
         });
         puzzleGenerated = !puzzleGenerated;
     }
-
-    // An array of moves for time travel //
-    const moves = [];
 
     // Returns class list for cells //
     function getClassName(row: number, col: number) {
