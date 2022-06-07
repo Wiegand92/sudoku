@@ -1,15 +1,27 @@
 <script lang='ts'>
-    import { generatePuzzle } from "./utils/generatePuzzle";
-    const {puzzle, puzzleSolution} = generatePuzzle();
-    // playerSolution will contain a copy of the puzzle for the player to make changes to //
+    // import { generatePuzzle } from "./utils/generatePuzzle";
+    // // playerSolution will contain a copy of the puzzle for the player to make changes to //
     const playerSolution = [];
-    puzzle.forEach(r=> {
-        const row = [];
-        r.forEach(c => {
-            row.push(c)
-        })
-        playerSolution.push(row)
-    });
+    let puzzle = [];
+    let puzzleSolution = [];
+    let puzzleGenerated = false;
+
+    const worker = new Worker(new URL('./utils/worker', import.meta.url));
+
+    worker.postMessage('')
+
+    worker.onmessage = function (e) {
+        puzzle = e.data.puzzle;
+        puzzleSolution = e.data.puzzleSolution;
+        puzzle.forEach(r=> {
+            const row = [];
+            r.forEach(c => {
+                row.push(c)
+            })
+            playerSolution.push(row)
+        });
+        puzzleGenerated = !puzzleGenerated;
+    }
 
     // An array of moves for time travel //
     const moves = [];
@@ -86,7 +98,8 @@
 
 </script>
 <section>
-    <div>
+    {#if puzzleGenerated}
+    <div class='puzzleGrid'>
     {#each puzzle as row, rowIndex}
         {#each row as column, colIndex}
             <span class={getClassName(rowIndex, colIndex)}>
@@ -107,12 +120,15 @@
         {/each}
     {/each}
     </div>
+    {:else}
+    <div>Please wait while we generate a new puzzle ...</div>
+    {/if}
 </section>
 <style lang='postcss'>
     section{
         @apply h-full w-full flex place-content-center;
     }
-    div{
+    .puzzleGrid{
         @apply inline-grid grid-cols-9 m-auto shadow-md;
     }
     span{
