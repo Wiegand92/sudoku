@@ -1,18 +1,33 @@
 <script lang='ts'>
-    import { generatePuzzle } from "./utils/generatePuzzle";
-    const {puzzle, puzzleSolution} = generatePuzzle();
-    // playerSolution will contain a copy of the puzzle for the player to make changes to //
-    const playerSolution = [];
-    puzzle.forEach(r=> {
-        const row = [];
-        r.forEach(c => {
-            row.push(c)
-        })
-        playerSolution.push(row)
-    });
-
     // An array of moves for time travel //
     const moves = [];
+    // playerSolution will contain a copy of the puzzle for the player to make changes to //
+    const playerSolution = [];
+    // These variables will be populated with the puzzle and solution //
+    let puzzle = [];
+    let puzzleSolution = [];
+    // Loading state for puzzle //
+    let puzzleGenerated = false;
+
+    // worker will generate puzzle on different thread to avoid blocking //
+    const worker = new Worker(new URL('./utils/worker', import.meta.url));
+
+    // Generate puzzle //
+    worker.postMessage('')
+
+    // When the worker finishes generation, copy over puzzle and puzzleSolution //
+    worker.onmessage = function (e) {
+        puzzle = e.data.puzzle;
+        puzzleSolution = e.data.puzzleSolution;
+        puzzle.forEach(r=> {
+            const row = [];
+            r.forEach(c => {
+                row.push(c)
+            })
+            playerSolution.push(row)
+        });
+        puzzleGenerated = !puzzleGenerated;
+    }
 
     // Returns class list for cells //
     function getClassName(row: number, col: number) {
@@ -86,7 +101,8 @@
 
 </script>
 <section>
-    <div>
+    {#if puzzleGenerated}
+    <div class='puzzleGrid'>
     {#each puzzle as row, rowIndex}
         {#each row as column, colIndex}
             <span class={getClassName(rowIndex, colIndex)}>
@@ -107,12 +123,15 @@
         {/each}
     {/each}
     </div>
+    {:else}
+    <div>Please wait while we generate a new puzzle ...</div>
+    {/if}
 </section>
 <style lang='postcss'>
     section{
         @apply h-full w-full flex place-content-center;
     }
-    div{
+    .puzzleGrid{
         @apply inline-grid grid-cols-9 m-auto shadow-md;
     }
     span{

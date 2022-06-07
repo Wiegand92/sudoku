@@ -6,7 +6,7 @@ const production = process.env.NODE_ENV === "production";
 
 const plugins = [new HtmlWebpackPlugin({ template: "src/index.html" })];
 
-if (!production) {
+if (production) {
   plugins.push(
     new MiniCssExtractPlugin({
       filename: "scripts/style.css",
