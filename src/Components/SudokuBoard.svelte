@@ -1,8 +1,12 @@
 <script lang='ts'>
+    import {fade} from 'svelte/transition'
+    import LoadingScreen from "./LoadingScreen.svelte";
+    import { blockCoordinates } from '../utils/blockCoordinates';
+    import { validMove } from '../utils/checkHouse';
     // An array of moves for time travel //
     const moves = [];
     // playerSolution will contain a copy of the puzzle for the player to make changes to //
-    const playerSolution = [];
+    let playerSolution = [];
     // These variables will be populated with the puzzle and solution //
     let puzzle = [];
     let puzzleSolution = [];
@@ -10,7 +14,7 @@
     let puzzleGenerated = false;
 
     // worker will generate puzzle on different thread to avoid blocking //
-    const worker = new Worker(new URL('./utils/worker', import.meta.url));
+    const worker = new Worker(new URL('../utils/worker', import.meta.url));
 
     // Generate puzzle //
     worker.postMessage('')
@@ -26,7 +30,7 @@
             })
             playerSolution.push(row)
         });
-        puzzleGenerated = !puzzleGenerated;
+        puzzleGenerated = true;
     }
 
     // Returns class list for cells //
@@ -62,7 +66,7 @@
     }
 
     // Manipulates playerSolution and moves //
-    function addNumber(row: number, col: number, move: number){
+    function addNumber(row: number, col: number, move: (number | '')){
         playerSolution[row][col] = move;
         moves.push({row, col, move});
     }
@@ -72,9 +76,14 @@
         const target = <HTMLInputElement>e.target;
         const number = Number(target.value);
         // When number is valid add to board/moves //
-        if(number <= 9 && number > 0) addNumber(row, col, number)
+        if(number <= 9 && number > 0) {
+            addNumber(row, col, number);
+            if(!validMove(playerSolution, row, col, blockCoordinates[row][col], number)){
+                console.log('Not a valid move')
+            }
+        }
         // When the player clears the box set it to null //
-        else if (target.value === '') target.value = '' 
+        else if (target.value === '') addNumber(row, col, '') 
         // Otherwise set the value to last correct value //
         else target.value = playerSolution[row][col] || '';
         if(checkPuzzle()){
@@ -99,10 +108,16 @@
         return solved;
     }
 
+    function newGame() {
+        playerSolution = []
+        puzzleGenerated = false;
+        worker.postMessage('')
+    }
+
 </script>
 <section>
     {#if puzzleGenerated}
-    <div class='puzzleGrid'>
+    <div class='puzzleGrid' transition:fade>
     {#each puzzle as row, rowIndex}
         {#each row as column, colIndex}
             <span class={getClassName(rowIndex, colIndex)}>
@@ -124,15 +139,16 @@
     {/each}
     </div>
     {:else}
-    <div>Please wait while we generate a new puzzle ...</div>
+    <LoadingScreen></LoadingScreen>
     {/if}
+    <button on:click={newGame} disabled={!puzzleGenerated}>New Game</button>
 </section>
 <style lang='postcss'>
     section{
-        @apply h-full w-full flex place-content-center;
+        @apply h-full flex flex-col place-content-around;
     }
     .puzzleGrid{
-        @apply inline-grid grid-cols-9 m-auto shadow-md;
+        @apply inline-grid flex-initial grid-cols-9 m-auto shadow-md;
     }
     span{
         @apply box-border h-8 aspect-square;
@@ -146,7 +162,7 @@
         @apply m-0 p-0 border-0 w-full text-center;
     }
     p, input {
-        @apply text-3xl;
+        @apply text-3xl font-mono;
     }
     /* Remove number input spinners */
     /* Chrome, Safari, Edge, Opera */

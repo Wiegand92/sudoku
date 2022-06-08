@@ -1,5 +1,5 @@
 <script lang='ts'>
-    import SudokuBoard from "./SudokuBoard.svelte";
+    import SudokuBoard from "./Components/SudokuBoard.svelte";
 </script>
 
 <section>
