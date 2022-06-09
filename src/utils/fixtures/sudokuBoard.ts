@@ -60,6 +60,18 @@ const multipleSolutionsBoard: SudokuBoard = [
   [1, 5, 4, 9, 3, 8, 6, 0, 0],
 ];
 
+const emptySudokuBoard: SudokuBoard = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+];
+
 const blockOne = [9, 8, 7, 2, 4, 6, 3, 5, 1];
 
 const rowOne = [9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -68,6 +80,7 @@ const columnOne = [9, 2, 3, 1, 6, 7, 5, 4, 8];
 
 export {
   sudokuBoard,
+  emptySudokuBoard,
   incompleteSudokuBoard,
   invalidSudokuBoard,
   easySudokuBoard,
