@@ -1,5 +1,6 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "include": ["src/**/*", "src/index.ts"],
-  "exclude": ["node_modules/*", "public/*"]
+  "exclude": ["node_modules/*", "public/*"],
+  "compilerOptions": { "module": "es2020" }
 }
