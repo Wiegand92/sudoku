@@ -37,6 +37,9 @@ function updateConflicts(newConflicts) {
   conflicts.set(newConflicts);
 }
 
+function updateSolved() {
+  get(solved) ? solved.set(false) : solved.set(true);
+}
 export {
   initialize,
   puzzleSolution,
@@ -46,4 +49,7 @@ export {
   conflicts,
   updateSolution,
   updateConflicts,
+  updateSolved,
+  solved,
+  moves,
 };
