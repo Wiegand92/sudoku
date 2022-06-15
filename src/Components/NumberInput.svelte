@@ -6,6 +6,7 @@
     updateSolved,
     updateSolution,
     moves,
+    movesRewound,
   } from "../store";
   import { cloneBoard } from "../utils/cloneBoard";
   import { validMove } from "../utils/checkHouse";
@@ -21,6 +22,14 @@
     const newPuzzle = cloneBoard($playerSolution);
     newPuzzle[row][col] = move || 0;
     updateSolution(newPuzzle);
+    if ($movesRewound > 0) {
+      const newMovesArray = [
+        ...$moves.slice(0, $moves.length - $movesRewound),
+        { row, col, move },
+      ];
+      $moves = newMovesArray;
+      $movesRewound = 0;
+    }
     $moves = [...$moves, { row, col, move }];
   }
   // Change Handler //
@@ -98,7 +107,10 @@
           origin: { row, col },
           rowConflict: { col: rowConflict, row },
           columnConflict: { row: columnConflict, col },
-          blockConflict: getBlockCoords(blockConflict, row, col),
+          blockConflict:
+            blockConflict !== -1
+              ? getBlockCoords(blockConflict, row, col)
+              : { blockRow: -1, blockCol: -1 },
         };
 
         updateConflicts(newConflicts);

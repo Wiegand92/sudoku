@@ -8,11 +8,15 @@ const puzzleGenerated = writable(false);
 const conflicts = writable(null);
 const moves = writable([]);
 const solved = writable(false);
+const movesRewound = writable(0);
 const timeStarted = 0;
 
 function initialize() {
   if (get(puzzleGenerated) === true) puzzleGenerated.set(false);
-  if (get(conflicts) !== null) conflicts.set(null);
+  conflicts.set(null);
+  moves.set([]);
+  movesRewound.set(0);
+
   // worker will generate puzzle on different thread to avoid blocking //
   const worker = new Worker(new URL("./utils/worker", import.meta.url));
 
@@ -52,4 +56,5 @@ export {
   updateSolved,
   solved,
   moves,
+  movesRewound,
 };

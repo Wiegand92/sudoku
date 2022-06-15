@@ -4,6 +4,7 @@
   import NewGameButton from "./NewGameButton.svelte";
   import WinScreen from "./WinScreen.svelte";
   import NumberInput from "./NumberInput.svelte";
+  import HistoryButtons from "./HistoryButtons.svelte";
   import {
     initialize,
     puzzle,
@@ -86,6 +87,7 @@
   {/if}
   {#if !$solved}
     <NewGameButton />
+    <HistoryButtons />
   {/if}
 </section>
 
