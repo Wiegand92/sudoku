@@ -170,7 +170,7 @@
 
 <style lang="postcss">
   input[type="number"] {
-    @apply m-0 p-0 text-center rounded-none;
+    @apply m-0 p-0 text-center rounded-none transition-all;
   }
   input[type="number"]:focus {
     @apply bg-slate-500 outline-none;

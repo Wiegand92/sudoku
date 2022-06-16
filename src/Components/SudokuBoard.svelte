@@ -1,24 +1,11 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
-  import LoadingScreen from "./LoadingScreen.svelte";
-  import NewGameButton from "./NewGameButton.svelte";
-  import WinScreen from "./WinScreen.svelte";
   import NumberInput from "./NumberInput.svelte";
-  import HistoryButtons from "./HistoryButtons.svelte";
-  import {
-    initialize,
-    puzzle,
-    playerSolution,
-    puzzleGenerated,
-    conflicts,
-    solved,
-  } from "../store";
-
-  initialize();
+  import { puzzle, playerSolution, conflicts } from "../store";
 
   // Returns class list for cells //
   function getClassName(row: number, col: number) {
-    let className: string = "";
+    let className: string = "puzzlePiece ";
     const adjustedRow = row + 1;
     const adjustedCol = col + 1;
     if (adjustedRow % 3 === 0) {
@@ -60,41 +47,25 @@
   }
 </script>
 
-<section>
-  {#if $solved}
-    <WinScreen />
-  {/if}
-  {#if $puzzleGenerated}
-    <div class="puzzleGrid" transition:fade>
-      {#each $playerSolution as row, rowIndex}
-        {#each row as column, colIndex ([rowIndex, colIndex])}
-          {#if $puzzle[rowIndex][colIndex] !== 0}
-            <span class={`${getClassName(rowIndex, colIndex)} puzzlePiece`}>
-              <p>{column}</p>
-            </span>
-          {:else}
-            <NumberInput
-              {rowIndex}
-              {colIndex}
-              classList={`${getClassName(rowIndex, colIndex)} puzzlePiece`}
-            />
-          {/if}
-        {/each}
-      {/each}
-    </div>
-  {:else}
-    <LoadingScreen />
-  {/if}
-  {#if !$solved}
-    <NewGameButton />
-    <HistoryButtons />
-  {/if}
-</section>
+<div class="puzzleGrid" in:fade>
+  {#each $playerSolution as row, rowIndex}
+    {#each row as column, colIndex ([rowIndex, colIndex])}
+      {#if $puzzle[rowIndex][colIndex] !== 0}
+        <span class={getClassName(rowIndex, colIndex)}>
+          <p>{column}</p>
+        </span>
+      {:else}
+        <NumberInput
+          {rowIndex}
+          {colIndex}
+          classList={getClassName(rowIndex, colIndex)}
+        />
+      {/if}
+    {/each}
+  {/each}
+</div>
 
 <style lang="postcss">
-  section {
-    @apply h-full flex flex-col place-content-around;
-  }
   .puzzleGrid {
     @apply inline-grid flex-initial grid-cols-9 m-auto shadow-lg rounded-md bg-black;
   }

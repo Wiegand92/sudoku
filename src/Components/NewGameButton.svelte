@@ -15,7 +15,7 @@
 
 <style lang="postcss">
   button {
-    @apply h-10 w-60 m-auto bg-green-500 rounded-md shadow-md border-none transition-all;
+    @apply h-10 w-32 md:h-20 md:w-60 bg-green-500 rounded-md shadow-md border-none transition-all;
     @apply text-xl;
   }
   button:hover {
