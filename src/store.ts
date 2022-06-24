@@ -9,6 +9,7 @@ const conflicts = writable(null);
 const moves = writable([]);
 const solved = writable(false);
 const movesRewound = writable(0);
+const numberSelected = writable(null);
 const timeStarted = 0;
 
 function initialize() {
@@ -31,6 +32,10 @@ function initialize() {
     puzzleGenerated.set(true);
     worker.terminate();
   };
+}
+
+function updateNumberSelected(num: null | number) {
+  numberSelected.set(num);
 }
 
 function updateSolution(newBoard) {
@@ -57,4 +62,6 @@ export {
   solved,
   moves,
   movesRewound,
+  numberSelected,
+  updateNumberSelected
 };

@@ -17,7 +17,7 @@
         (move) => move.row === lastMove.row && move.col === lastMove.col
       );
       // If previous values, set to most recent, else set to zero //
-      if (previousValues.length > 1) {
+      if (previousValues.length > 0) {
         $playerSolution[lastMove.row][lastMove.col] =
           previousValues[previousValues.length - 1].move;
       } else {
@@ -28,7 +28,7 @@
     }
   }
   function redoMove() {
-    if ($movesRewound > 0) {
+    if (active) {
       const newMoveIndex = $movesRewound - 1;
       const nextMove = $moves[$moves.length - 1 - newMoveIndex];
       $playerSolution[nextMove.row][nextMove.col] = nextMove.move;

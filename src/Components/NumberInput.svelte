@@ -7,6 +7,7 @@
     updateSolution,
     moves,
     movesRewound,
+    numberSelected,
   } from "../store";
   import { cloneBoard } from "../utils/cloneBoard";
   import { validMove } from "../utils/checkHouse";
@@ -151,6 +152,10 @@
   function handleClick(e) {
     const target = <HTMLInputElement>e.target;
     target.focus();
+    if ($numberSelected !== null) {
+      target.value = $numberSelected;
+      target.blur();
+    }
   }
 </script>
 
