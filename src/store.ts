@@ -38,6 +38,14 @@ function updateNumberSelected(num: null | number) {
   numberSelected.set(num);
 }
 
+function updateRewinds(num) {
+  movesRewound.set(num);
+}
+
+function updateMoves(newMoves) {
+  moves.set(newMoves);
+}
+
 function updateSolution(newBoard) {
   playerSolution.set(newBoard);
 }
@@ -54,14 +62,16 @@ export {
   puzzleSolution,
   puzzle,
   playerSolution,
+  updateSolution,
   puzzleGenerated,
   conflicts,
-  updateSolution,
   updateConflicts,
-  updateSolved,
   solved,
+  updateSolved,
   moves,
+  updateMoves,
   movesRewound,
+  updateRewinds,
   numberSelected,
-  updateNumberSelected
+  updateNumberSelected,
 };
