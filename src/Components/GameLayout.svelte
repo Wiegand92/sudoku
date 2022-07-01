@@ -4,8 +4,6 @@
   import WinScreen from "./WinScreen.svelte";
   import Controls from "./Controls.svelte";
   import SudokuBoard from "./SudokuBoard.svelte";
-  import NewGameButton from "./NewGameButton.svelte";
-  import HistoryButtons from "./HistoryButtons.svelte";
   import LoadingScreen from "./LoadingScreen.svelte";
   onMount(initialize);
 </script>
@@ -22,10 +20,7 @@
   {/if}
 
   {#if !$solved}
-    <Controls>
-      <NewGameButton slot="new-game" />
-      <HistoryButtons slot="history" />
-    </Controls>
+    <Controls />
   {/if}
 </section>
 

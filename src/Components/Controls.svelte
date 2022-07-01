@@ -1,19 +1,41 @@
 <script lang="ts">
+  import BackButton from "./BackButton.svelte";
+  import ForwardButton from "./ForwardButton.svelte";
   import NumberButton from "./NumberButton.svelte";
+  import NewGameButton from "./NewGameButton.svelte";
 
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 </script>
 
 <section>
-  <slot name="history" />
-  <slot name="new-game" />
-  {#each numbers as number}
-    <NumberButton {number} />
-  {/each}
+  <div class="numbers">
+    {#each numbers as number}
+      <NumberButton {number} />
+    {/each}
+  </div>
+  <div class="history">
+    <BackButton />
+    <NewGameButton />
+    <ForwardButton />
+  </div>
 </section>
 
 <style lang="postcss">
   section {
-    @apply flex flex-row justify-center;
+    @apply flex flex-col;
+  }
+  .history {
+    @apply flex mx-auto;
+  }
+  .numbers {
+    @apply flex flex-row mx-auto mb-2;
+  }
+
+  :global(.numbers button) {
+    @apply mx-1;
+  }
+
+  :global(.history *) {
+    @apply mx-1;
   }
 </style>

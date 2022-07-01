@@ -11,9 +11,6 @@
   :global(html, body) {
     @apply p-0 m-0 h-full w-full fixed;
   }
-  :global(*, *::after, *::before) {
-    @apply box-border;
-  }
   section {
     @apply p-0 m-0 h-full w-full fixed flex flex-col;
   }
