@@ -18,7 +18,7 @@ module.exports = {
   entry: "./src/index.ts",
   output: {
     filename: "scripts/index.js",
-    path: path.join(__dirname, "/public"),
+    path: path.join(__dirname, "/docs"),
   },
   resolve: {
     alias: {
