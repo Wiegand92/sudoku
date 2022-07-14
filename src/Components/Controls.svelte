@@ -28,7 +28,8 @@
     @apply flex mx-auto;
   }
   .numbers {
-    @apply flex flex-row mx-auto mb-2;
+    @apply flex flex-row mb-2;
+    @apply md:mx-auto;
   }
 
   :global(.numbers button) {

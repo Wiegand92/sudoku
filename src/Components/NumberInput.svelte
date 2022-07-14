@@ -1,5 +1,11 @@
 <script lang="ts">
-  import { updateConflicts, playerSolution, numberSelected } from "../store";
+  import { onMount } from "svelte";
+
+  import {
+    updateConflicts,
+    playerSolution,
+    numberSelected,
+  } from "../store";
   import { makeMove } from "../utils/boardManipulations";
 
   export let rowIndex: number;
@@ -40,10 +46,10 @@
 
 <style lang="postcss">
   input[type="number"] {
-    @apply m-0 p-0 text-center rounded-none transition-all;
+    @apply m-0 p-0 text-center rounded-none transition-all text-purple-700;
   }
   input[type="number"]:focus {
-    @apply bg-slate-500 outline-none;
+    @apply bg-purple-500 outline-none text-black;
   }
   /* Remove number input spinners */
   /* Chrome, Safari, Edge, Opera */

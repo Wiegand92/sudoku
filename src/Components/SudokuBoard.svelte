@@ -71,12 +71,13 @@
   }
   :global(.puzzlePiece) {
     @apply h-10 w-10 aspect-square p-0;
-    @apply text-3xl;
+    @apply text-2xl;
+    @apply md:text-3xl;
     @apply border-solid border-black border-[1px] flex place-content-center bg-white;
     @apply md:h-20 md:w-20;
   }
   :global(.conflict p, .conflict) {
-    @apply text-red-600;
+    @apply !text-red-600;
   }
   p {
     @apply m-auto p-0;
