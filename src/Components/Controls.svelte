@@ -3,6 +3,7 @@
   import ForwardButton from "./ForwardButton.svelte";
   import NumberButton from "./NumberButton.svelte";
   import NewGameButton from "./NewGameButton.svelte";
+  import NoteButton from "./NoteButton.svelte";
 
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 </script>
@@ -17,6 +18,7 @@
     <BackButton />
     <NewGameButton />
     <ForwardButton />
+    <NoteButton />
   </div>
 </section>
 

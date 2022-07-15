@@ -67,7 +67,7 @@
 
 <style lang="postcss">
   .puzzleGrid {
-    @apply inline-grid flex-initial grid-cols-9 m-auto shadow-lg rounded-md bg-black;
+    @apply inline-grid flex-initial grid-cols-9 m-auto shadow-lg rounded-md bg-opacity-0;
   }
   :global(.puzzlePiece) {
     @apply h-10 w-10 aspect-square p-0;

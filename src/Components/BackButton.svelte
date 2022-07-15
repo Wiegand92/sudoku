@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { moves, movesRewound, playerSolution } from "../store";
+  import { addNote, moves, movesRewound, playerSolution } from "../store";
   $: active = $moves.length > 0;
 
   function undoMove() {
@@ -7,21 +7,26 @@
     if (active && $movesRewound < $moves.length) {
       // Find what the last move was //
       const lastMove = $moves[$moves.length - (1 + $movesRewound)];
+      console.log(lastMove);
       // Copy moves array before the last move //
       const previousMoves = [...$moves].slice(
         0,
         $moves.length - (1 + $movesRewound)
       );
-      // Look for previous values at the index //
-      const previousValues = previousMoves.filter(
-        (move) => move.row === lastMove.row && move.col === lastMove.col
-      );
-      // If previous values, set to most recent, else set to zero //
-      if (previousValues.length > 0) {
-        $playerSolution[lastMove.row][lastMove.col] =
-          previousValues[previousValues.length - 1].move;
+      if (lastMove.noteIndex === undefined) {
+        // Look for previous values at the index //
+        const previousValues = previousMoves.filter(
+          (move) => move.row === lastMove.row && move.col === lastMove.col
+        );
+        // If previous values, set to most recent, else set to zero //
+        if (previousValues.length > 0) {
+          $playerSolution[lastMove.row][lastMove.col] =
+            previousValues[previousValues.length - 1].move;
+        } else {
+          $playerSolution[lastMove.row][lastMove.col] = 0;
+        }
       } else {
-        $playerSolution[lastMove.row][lastMove.col] = 0;
+        addNote(lastMove.noteIndex, lastMove.move);
       }
       // Increment moves rewound //
       $movesRewound += 1;

@@ -1,12 +1,16 @@
 <script lang="ts">
-  import { moves, movesRewound, playerSolution } from "../store";
+  import { addNote, moves, movesRewound, playerSolution } from "../store";
   $: active = $moves.length > 0;
 
   function redoMove() {
     if (active) {
       const newMoveIndex = $movesRewound - 1;
       const nextMove = $moves[$moves.length - 1 - newMoveIndex];
-      $playerSolution[nextMove.row][nextMove.col] = nextMove.move;
+      if (nextMove.noteIndex === undefined) {
+        $playerSolution[nextMove.row][nextMove.col] = nextMove.move;
+      } else {
+        addNote(nextMove.noteIndex, nextMove.move);
+      }
       $movesRewound = newMoveIndex;
     }
   }

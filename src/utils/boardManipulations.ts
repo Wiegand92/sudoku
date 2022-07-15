@@ -8,6 +8,9 @@ import {
   updateConflicts,
   updateSolved,
   puzzleSolution,
+  takeNotes,
+  playerNotes,
+  addNote,
 } from "../store";
 import { get } from "svelte/store";
 import { cloneBoard } from "./cloneBoard";
@@ -17,25 +20,37 @@ import { getRow, getColumn, getBlock } from "./getSections";
 
 // Manipulates playerSolution and moves //
 function addNumber(row: number, col: number, move: number | "") {
+  const takingNotes = get(takeNotes);
+  const pNotes = get(playerNotes);
+  let noteIndex;
   // Clone puzzle to make changes //
   const newPuzzle = cloneBoard(get(playerSolution));
   // Set puzzle index to move given or 0 //
-  newPuzzle[row][col] = move || 0;
-  updateSolution(newPuzzle);
+  if (!takingNotes) {
+    newPuzzle[row][col] = move || 0;
+    console.log(newPuzzle[row][col]);
+    updateSolution(newPuzzle);
+  } else {
+    noteIndex = pNotes.findIndex(
+      (note) => note.index[0] === row && note.index[1] === col
+    );
+    addNote(noteIndex, move);
+  }
   // Update moves array //
   const rewinds = get(movesRewound);
   const playerMoves = get(moves);
   // If player has rewound remove future moves and set rewinds to 0 //
+  const newMove = takingNotes ? { noteIndex, move } : { row, col, move };
   if (rewinds > 0) {
     const newMovesArray = [
       ...playerMoves.slice(0, playerMoves.length - rewinds),
-      { row, col, move },
+      newMove,
     ];
     updateMoves(newMovesArray);
     updateRewinds(0);
   } else {
     // Else add move to end of array //
-    updateMoves([...playerMoves, { row, col, move }]);
+    updateMoves([...playerMoves, newMove]);
   }
 }
 
@@ -87,6 +102,7 @@ function getBlockCoords(blockConflict: number, row: number, col: number) {
 function makeMove(row, col, number) {
   const solution = get(playerSolution);
   // When number is valid add to board/moves //
+  console.log(number);
   if (number <= 9 && number > 0) {
     if (!validMove(solution, row, col, blockCoordinates[row][col], number)) {
       const columnConflict = getColumn(solution, col).indexOf(number);
@@ -110,7 +126,10 @@ function makeMove(row, col, number) {
     addNumber(row, col, number);
   }
   // When the player clears the box set it to null //
-  else if (number === "") addNumber(row, col, "");
+  else if (number === 0) {
+    console.log(number);
+    addNumber(row, col, 0);
+  }
   if (checkPuzzle()) {
     updateSolved();
   }
