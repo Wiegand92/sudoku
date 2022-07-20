@@ -12,23 +12,35 @@
 - [x] Webpack
 - [x] Svelte
 - [x] Jest
+- [x] TailwindCSS
 
 ## Todo
 
 - [x] Setup webpack w/babel, typescript, and frontend tech
-- [ ] Create sudoku solver
+- [x] Create sudoku solver
   - [x] Helper functions
-  - [ ] Backtracking Algorithm
+  - [x] Backtracking Algorithm
   - [ ] One Cell Constraint Algorithm
-- [ ] Create sudoku generator (dependent on solver)
+- [x] Create sudoku generator (dependent on solver)
 - [ ] Create front-end (Svelte)
+  - [x] Board
+    - [x] NumberInput
+    - [x] Note
+  - [ ] Controls
+    - [x] NumberButtons
+    - [x] HistoryButtons
+    - [x] NewGameButton
+    - [ ] EraserButton
 
 ## Game Features
 
 - [ ] Difficulty levels
-- [ ] Input numbers as notes
+- [x] Input numbers as notes
 - [ ] Keyboard controls
+  - [ ] Number keys to set numberSelected
+  - [ ] Arrow keys to move around board
 - [ ] Mobile functionality
+  - [ ] Override VirtualKeyboard with custom controls
 - [ ] Hints (?)
 
 ## Resources
