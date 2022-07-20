@@ -22,26 +22,29 @@
   - [x] Backtracking Algorithm
   - [ ] One Cell Constraint Algorithm
 - [x] Create sudoku generator (dependent on solver)
-- [ ] Create front-end (Svelte)
-  - [x] Board
-    - [x] NumberInput
-    - [x] Note
-  - [ ] Controls
-    - [x] NumberButtons
-    - [x] HistoryButtons
-    - [x] NewGameButton
-    - [ ] EraserButton
 
-## Game Features
+  ### Front-end
 
-- [ ] Difficulty levels
-- [x] Input numbers as notes
-- [ ] Keyboard controls
-  - [ ] Number keys to set numberSelected
-  - [ ] Arrow keys to move around board
-- [ ] Mobile functionality
-  - [ ] Override VirtualKeyboard with custom controls
-- [ ] Hints (?)
+  - [ ] Create front-end (Svelte)
+    - [x] Board
+      - [x] NumberInput
+      - [x] Note
+    - [ ] Controls
+      - [x] NumberButtons
+      - [x] HistoryButtons
+      - [x] NewGameButton
+      - [ ] EraserButton
+
+  ### Game Features
+
+  - [ ] Difficulty levels
+  - [x] Input numbers as notes
+  - [ ] Keyboard controls
+    - [ ] Number keys to set numberSelected
+    - [ ] Arrow keys to move around board
+  - [ ] Mobile functionality
+    - [ ] Override VirtualKeyboard with custom controls
+  - [ ] Hints (?)
 
 ## Resources
 
