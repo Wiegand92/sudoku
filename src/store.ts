@@ -24,6 +24,8 @@ const playerNotes = writable([]);
 // Is the player taking notes //
 const takeNotes = writable(true);
 const timeStarted = 0;
+// Is the Eraser active //
+const eraserActive = writable(false);
 
 function initialize() {
   if (get(puzzleGenerated) === true) puzzleGenerated.set(false);
@@ -117,4 +119,5 @@ export {
   playerNotes,
   takeNotes,
   addNote,
+  eraserActive,
 };

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { playerNotes } from "../store";
 
-  export let noteIndex;
+  export let noteIndex: number;
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 </script>
 

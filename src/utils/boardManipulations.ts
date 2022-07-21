@@ -19,7 +19,7 @@ import { validMove } from "./checkHouse";
 import { getRow, getColumn, getBlock } from "./getSections";
 
 // Manipulates playerSolution and moves //
-function addNumber(row: number, col: number, move: number | "") {
+function addNumber(row: number, col: number, move: number) {
   const takingNotes = get(takeNotes);
   const pNotes = get(playerNotes);
   let noteIndex;
@@ -27,8 +27,7 @@ function addNumber(row: number, col: number, move: number | "") {
   const newPuzzle = cloneBoard(get(playerSolution));
   // Set puzzle index to move given or 0 //
   if (!takingNotes) {
-    newPuzzle[row][col] = move || 0;
-    console.log(newPuzzle[row][col]);
+    newPuzzle[row][col] = move;
     updateSolution(newPuzzle);
   } else {
     noteIndex = pNotes.findIndex(
@@ -56,7 +55,7 @@ function addNumber(row: number, col: number, move: number | "") {
 
 function getBlockCoords(blockConflict: number, row: number, col: number) {
   let blockCol = blockConflict % 3;
-  let blockRow;
+  let blockRow: number;
   if (blockConflict > 5) blockRow = 2;
   else if (blockConflict > 2) blockRow = 1;
   else blockRow = 0;
@@ -99,7 +98,7 @@ function getBlockCoords(blockConflict: number, row: number, col: number) {
   return { blockRow, blockCol };
 }
 
-function makeMove(row, col, number) {
+function makeMove(row: number, col: number, number: number) {
   const solution = get(playerSolution);
   // When number is valid add to board/moves //
   console.log(number);
@@ -127,7 +126,6 @@ function makeMove(row, col, number) {
   }
   // When the player clears the box set it to null //
   else if (number === 0) {
-    console.log(number);
     addNumber(row, col, 0);
   }
   if (checkPuzzle()) {

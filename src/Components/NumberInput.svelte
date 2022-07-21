@@ -5,6 +5,7 @@
     numberSelected,
     playerNotes,
     takeNotes,
+    eraserActive,
   } from "../store";
   import { makeMove } from "../utils/boardManipulations";
   import Note from "./Note.svelte";
@@ -31,13 +32,17 @@
     }
   }
 
-  function handleClick(e, row, col) {
+  function handleClick(e: Event, row: number, col: number) {
     const target = <HTMLInputElement>e.target;
+    console.log(target.value, $eraserActive);
     target.focus();
-    if ($numberSelected !== null) {
+    if ($numberSelected !== null && !$eraserActive) {
       makeMove(row, col, $numberSelected);
       if ($takeNotes) target.value = "";
       target.blur();
+    }
+    if ($eraserActive && target.value !== "") {
+      makeMove(row, col, 0);
     }
   }
 </script>
