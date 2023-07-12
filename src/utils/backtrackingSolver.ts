@@ -29,7 +29,8 @@ function backtrackingSolver(
   }
 
   // If the square is not 0 //
-  if (board[row][col] > 0) {
+  let value: number | number[] = board[row][col];
+  if (typeof value === "number" && value > 0) {
     return backtrackingSolver(board, row, col + 1, count);
   }
 

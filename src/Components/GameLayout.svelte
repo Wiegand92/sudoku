@@ -26,6 +26,6 @@
 
 <style lang="postcss">
   section {
-    @apply h-full flex flex-col place-content-around;
+    @apply h-full flex flex-col;
   }
 </style>

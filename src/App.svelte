@@ -1,5 +1,13 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   import GameLayout from "./Components/GameLayout.svelte";
+  import { derivedPuzzles, puzzleSolution } from "./Stores/puzzleStore";
+
+  onMount(async () => {
+    const puzzles = await $derivedPuzzles.initialize();
+    console.log($puzzleSolution);
+  });
 </script>
 
 <section>

@@ -22,7 +22,7 @@ const numberSelected = writable(null);
 // Holds any notes the player has made //
 const playerNotes = writable([]);
 // Is the player taking notes //
-const takeNotes = writable(true);
+const takeNotes = writable(false);
 const timeStarted = 0;
 // Is the Eraser active //
 const eraserActive = writable(false);

@@ -53,7 +53,7 @@
   {/if}
   <input
     type="number"
-    inputmode="numeric"
+    inputmode="none"
     aria-label={`input-${rowIndex}-${colIndex}`}
     id={`${rowIndex},${colIndex}`}
     min="1"

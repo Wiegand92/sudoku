@@ -32,8 +32,9 @@
     @apply flex mx-auto;
   }
   .numbers {
-    @apply flex flex-row mb-2;
-    @apply md:mx-auto;
+    @apply grid grid-flow-col-dense grid-rows-3;
+    @apply mb-2 max-w-min place-self-center;
+    @apply md:grid-rows-1;
   }
 
   :global(.numbers button) {

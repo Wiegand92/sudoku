@@ -122,12 +122,9 @@ function makeMove(row: number, col: number, number: number) {
 
       updateConflicts(newConflicts);
     }
-    addNumber(row, col, number);
   }
-  // When the player clears the box set it to null //
-  else if (number === 0) {
-    addNumber(row, col, 0);
-  }
+  addNumber(row, col, number);
+
   if (checkPuzzle()) {
     updateSolved();
   }
