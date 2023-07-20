@@ -26,6 +26,6 @@
 
 <style lang="postcss">
   section {
-    @apply h-full flex flex-col;
+    @apply h-full justify-around place-items-center flex flex-col;
   }
 </style>

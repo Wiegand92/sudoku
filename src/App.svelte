@@ -23,7 +23,7 @@
     @apply box-border;
   }
   section {
-    @apply p-0 m-0 h-full w-full fixed flex flex-col;
+    @apply h-[calc(100%-68px)];
   }
   h1 {
     @apply text-3xl bg-purple-500 m-0 p-4 text-right;

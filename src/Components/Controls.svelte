@@ -26,22 +26,13 @@
 
 <style lang="postcss">
   section {
-    @apply flex flex-col;
+    @apply flex flex-col w-full items-center;
   }
   .history {
-    @apply flex mx-auto;
+    @apply flex place-content-around;
   }
   .numbers {
-    @apply grid grid-flow-col-dense grid-rows-3;
-    @apply mb-2 max-w-min place-self-center;
-    @apply md:grid-rows-1;
-  }
-
-  :global(.numbers button) {
-    @apply mx-1;
-  }
-
-  :global(.history *) {
-    @apply mx-1;
+    @apply flex;
+    @apply place-content-around;
   }
 </style>

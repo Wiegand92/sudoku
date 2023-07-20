@@ -7,16 +7,21 @@
 
 <div>
   {#each numbers as number}
-    <span>{$playerNotes[noteIndex].notes.includes(number) ? number : ""}</span>
+    <span>
+      {$playerNotes[noteIndex].notes.includes(number) ? number : ""}
+    </span>
   {/each}
 </div>
 
 <style lang="postcss">
   div {
-    @apply text-[0.5rem];
-    @apply grid grid-cols-3 absolute -z-10;
-    @apply h-10 w-10 aspect-square p-0;
-    @apply md:h-20 md:text-sm md:w-20;
-    @apply place-items-center;
+    @apply grid grid-cols-3 absolute z-10 bg-white;
+    @apply aspect-square;
+    height: 90%;
+    place-self: center;
+  }
+  span {
+    @apply flex aspect-square place-content-center items-center;
+    font-size: calc(10% + 8px);
   }
 </style>

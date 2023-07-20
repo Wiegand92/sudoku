@@ -47,7 +47,7 @@
   }
 </script>
 
-<div>
+<div class={classList}>
   {#if showNotes}
     <Note {noteIndex} />
   {/if}
@@ -62,17 +62,20 @@
     on:change={(e) => {
       handleChange(e, rowIndex, colIndex);
     }}
-    class={classList}
     on:click={(e) => handleClick(e, rowIndex, colIndex)}
   />
 </div>
 
 <style lang="postcss">
+  div {
+    @apply relative flex;
+  }
   input[type="number"] {
-    @apply m-0 p-0 text-center rounded-none transition-all text-purple-700 bg-opacity-0;
+    @apply aspect-square p-0 text-center rounded-none transition-all z-20 bg-opacity-0 text-purple-700 bg-white border-0;
+    font-size: calc(2vw + 10px);
   }
   input[type="number"]:focus {
-    @apply bg-purple-500 outline-none text-black bg-opacity-50;
+    @apply bg-purple-500 bg-opacity-50 outline-none text-black;
   }
   /* Remove number input spinners */
   /* Chrome, Safari, Edge, Opera */

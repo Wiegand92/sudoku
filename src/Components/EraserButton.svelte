@@ -18,9 +18,10 @@
 
 <style lang="postcss">
   svg {
-    @apply h-10 w-10 text-center;
-    @apply md:h-20 md:w-20;
+    @apply text-center aspect-square;
     @apply bg-slate-500 rounded-md shadow-lg cursor-pointer;
+    @apply h-[8vw];
+    @apply md:h-[6.5vh];
   }
   .active {
     @apply bg-green-500;

@@ -36,9 +36,9 @@
 
 <style lang="postcss">
   svg {
-    @apply h-10 w-10;
-    @apply md:h-20 md:w-20;
-    @apply bg-green-500 rounded-md shadow-lg cursor-pointer;
+    @apply bg-green-500 rounded-md shadow-lg cursor-pointer aspect-square;
+    @apply h-[8vw];
+    @apply md:h-[6.5vh];
   }
   .inactive {
     @apply bg-slate-500 cursor-default;

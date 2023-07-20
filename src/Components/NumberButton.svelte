@@ -30,9 +30,11 @@
 
 <style lang="postcss">
   button {
-    @apply h-10 w-10 rounded-md text-xl place-items-center place-content-center flex;
-    @apply md:text-3xl md:h-20 md:w-20;
+    @apply rounded-md place-items-center aspect-square place-content-center flex;
     @apply bg-slate-500 text-black;
+    font-size: calc(2vw + 10px);
+    @apply h-[8vw];
+    @apply md:h-[6.5vh];
   }
   .selected {
     @apply bg-green-500;
